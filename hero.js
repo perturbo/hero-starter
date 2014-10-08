@@ -15,40 +15,44 @@ var move = function(gameData, helpers) {
    weakEnemy = helpers.findNearestWeakerEnemy(gameData);
    nonTeamDiamondMine = helpers.findNearestNonTeamDiamondMine(gameData);
    healthWell = helpers.findNearestHealthWell(gameData);
-//   teamMember = helpers.findNearestTeamMember(gameData);
+   teamMember = helpers.findNearestTeamMember(gameData);
 
    
    // Finish him!!
-   if (typeof directionToEnemy != "undefined" && distanceToEnemy === 1 && healthOfEnemy <= 30) {
+   if (typeof directionToEnemy != 'undefined' && distanceToEnemy === 1 && healthOfEnemy <= 30) {
      return directionToEnemy;
    }
 
    // OMG RUN....
-   else if (myHero.health < 40) {
+   else if (myHero.health <= 30) {
      return healthWell;
    }
 
    // Shhh hunting rabbit
-   else if (typeof weakEnemy != "undefined") {
+   else if (typeof weakEnemy != 'undefined') {
      return weakEnemy;
    }
 
    // While I'm here ....
-   else if (typeof directionToEnemy != "undefined" && distanceToEnemy === 1) {
+   else if (typeof directionToEnemy != 'undefined' && distanceToEnemy === 1) {
      return directionToEnemy;
    }
 
    // Quick!  No one is around to stop me
-   else if (typeof nonTeamDiamondMine != "undefined" && distanceToEnemy > 3 ){
+   else if (typeof nonTeamDiamondMine != 'undefined' && distanceToEnemy > 3 && myHero.health > Math.max(50, 100-10*(distanceToEnemy-3))){
      return nonTeamDiamondMine;
    }
 
-// Help a friend
-//   else if (typeof teamMember != "undefined") {
-//     return teamMember;
-//   }
+   // This looks like a good place to sit .. except when I'm at 100 health
+   else if (myHero.health < 100) {
+     return healthWell;
+   }
 
-   // This looks like a good place to sit .. except when I'm at 100 health [TODO]
+   // Help a friend
+   else if (typeof teamMember != 'undefined') {
+     return teamMember;
+   }
+
    else {
      return healthWell;
    }

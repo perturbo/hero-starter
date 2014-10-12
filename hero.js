@@ -39,7 +39,7 @@ var move = function(gameData, helpers) {
    }
 
    // Quick!  No one is around to stop me
-   else if (typeof nonTeamDiamondMine != 'undefined' && distanceToEnemy > 3 && myHero.health > Math.max(50, 100-10*(distanceToEnemy-3))){
+   else if (typeof nonTeamDiamondMine != 'undefined' && distanceToEnemy > 5 && myHero.health > Math.max(50, 100-10*(distanceToEnemy-3))){
      return nonTeamDiamondMine;
    }
 

@@ -24,13 +24,7 @@ var Game = require('./game_logic/Game.js');
 
 //Get my hero's move function ("brain")
 var heroMoveFunction = require('./hero.js');
-
-//The move function ("brain") the practice enemy will use
-var enemyMoveFunction = function(gameData, helpers) {
-  //Move in a random direction
-  var choices = ['North', 'South', 'East', 'West'];
-  return choices[Math.floor(Math.random()*4)];
-}
+var enemyMoveFunction = require('./heroes/hero-unwise-assassin.js');
 
 //Makes a new game with a 5x5 board
 var game = new Game(9);
@@ -45,10 +39,11 @@ game.addDiamondMine(6,2);
 game.addDiamondMine(6,6);
 
 //Add your hero in the top left corner of the map (team 0)
-game.addHero(0, 0, 'MyHero', 0);
+//game.addHero(0, 0, 'MyHero', 0);
 
 //Add an enemy hero in the bottom left corner of the map (team 1)
 game.addHero(8, 8, 'Enemy', 1);
+game.addHero(0, 0, 'MyHero', 0);
 
 console.log('About to start the game!  Here is what the board looks like:');
 
